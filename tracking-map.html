@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Real-time Location Tracking</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'MAPBOX_API_KEY';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            bounds: [[-73.960478, 40.812534], [-73.938767, 40.822371]], 
+            fitBoundsOptions: { padding: 10 }
+        });
+
+        const coordinates = [
+            [-73.949699, 40.819938],
+            [-73.949261, 40.820549],
+            [-73.948621, 40.821416],
+            [-73.948185, 40.821970],
+            [-73.947185, 40.823358],
+            [-73.946292, 40.824560],
+            [-73.944891, 40.824014],
+            [-73.946099, 40.821369],
+            [-73.948048, 40.822093],
+            [-73.949699, 40.819938]
+        ];
+
+        let i = 0;
+
+        map.on('load', () => {
+            map.addSource('gps', { type: 'geojson', data: { type: 'Point', coordinates: coordinates[i] } });
+            map.addLayer({
+                'id': 'gps',
+                'type': 'symbol',
+                'source': 'gps',
+                'layout': { 
+			'icon-image': 'rocket',
+			'icon-size' : 2 
+			}
+            });
+
+            setInterval(() => {
+                i = (i + 1) % coordinates.length;
+                map.getSource('gps').setData({
+                    type: 'Point',
+                    coordinates: coordinates[i]
+                });
+                map.flyTo({ center: coordinates[i], speed: 0.25 });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
