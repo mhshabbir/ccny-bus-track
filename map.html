@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Real-time Location Tracking</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    <script src="gpscoordformatter.js"></script>
+    <script src="gpscoordsget.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXh0YXN5MTIzIiwiYSI6ImNsdHRrYXEwaDB0bmQya3BlZzUzNWNucWQifQ.i-4dUpV8L9VDTd1bsJYIFw';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            bounds: [[-73.960478, 40.812534], [-73.938767, 40.822371]], 
+            fitBoundsOptions: { padding: 10 }
+        });
+
+        async function updateLocation() {
+            const coordinates = await getCoordinates();
+            const formattedCoordinates = formatCoordinates(coordinates);
+            const newCoordinate = formattedCoordinates[0];
+
+            // Get the map bounds
+            const bounds = map.getBounds();
+            const minLng = bounds.getWest();
+            const maxLng = bounds.getEast();
+            const minLat = bounds.getSouth();
+            const maxLat = bounds.getNorth();
+
+            // Check if the new coordinate falls within the bounds
+            const [lng, lat] = newCoordinate;
+            if (lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat) {
+                map.getSource('gps').setData({
+                    type: 'Point',
+                    coordinates: newCoordinate
+                });
+                map.flyTo({ center: newCoordinate, speed: 0.25 });
+            } else {
+                console.log('New coordinate is out of bounds. Location not updated.');
+            }
+        }
+
+
+        map.on('load', async () => {
+            const coordinates = await getCoordinates();
+            const formattedCoordinates = formatCoordinates(coordinates);
+            map.addSource('gps', { type: 'geojson', data: { type: 'Point', coordinates: formattedCoordinates[0] } });
+            map.addLayer({
+                'id': 'gps',
+                'type': 'symbol',
+                'source': 'gps',
+                'layout': { 
+                    'icon-image': 'rocket',
+                    'icon-size' : 2 
+                }
+            });
+
+            setInterval(updateLocation, 2000);
+        });
+    </script>
+</body>
+</html>

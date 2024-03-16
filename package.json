@@ -1,0 +1,26 @@
+{
+  "name": "ccny-bus-track",
+  "version": "1.0.0",
+  "description": "CCNY Bus Tracker will be a web application that will display a map of CCNY bus tracks and their estimated time of arrival. It will also provide weather information on whether the buses are running or not.",
+  "main": "gpscoordsformatter.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest.setup.js"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "jsdom": "^24.0.0"
+  },
+  "dependencies": {
+    "mapbox-gl": "^3.2.0",
+    "puppeteer": "^22.5.0"
+  }
+}
