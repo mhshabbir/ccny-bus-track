@@ -1,0 +1,15 @@
+# Node.js dependencies
+/node_modules
+
+# Coverage reports
+/coverage
+
+# Environment configuration
+.env
+
+# Editor-specific files
+.vscode
+.idea
+
+# Ignore any log files
+*.log
