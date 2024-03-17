@@ -6,8 +6,9 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
-    <script src="gpscoordformatter.js"></script>
-    <script src="gpscoordsget.js"></script>
+    <script src="getCoords.js"></script>
+    <script src="formatCoords.js"></script>
+    <script src="inBound.js"></script>
     <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -38,7 +39,7 @@
 
             // Check if the new coordinate falls within the bounds
             const [lng, lat] = newCoordinate;
-            if (lng >= minLng && lng <= maxLng && lat >= minLat && lat <= maxLat) {
+            if (areCoordinatesWithinBounds(newCoordinate, minLng, maxLng, minLat, maxLat)) {
                 map.getSource('gps').setData({
                     type: 'Point',
                     coordinates: newCoordinate
