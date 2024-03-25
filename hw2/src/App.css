@@ -1,0 +1,17 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.button-container {
+  position: absolute;   /* Positioning relative to the nearest positioned ancestor instead of the initial containing block */
+  top: 50%;             /* Move the top edge to the center of the container */
+  left: 50%;            /* Move the left edge to the center of the container */
+  transform: translate(-50%, -50%); /* Shift the element left and up by half its width and height to center it */
+  display: flex;        /* Use flexbox layout to align inner elements */
+  flex-direction: column; /* Stack the buttons vertically */
+  align-items: center;  /* Center-align the flex items horizontally */
+  justify-content: center; /* Center-align the flex items vertically */
+}
