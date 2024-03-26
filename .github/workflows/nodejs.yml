@@ -25,16 +25,13 @@ jobs:
       run: npm start
       working-directory: LOGIN-SIGNUP/login-signup
 
-
     - name: Run tests
       run: npm test 
-
-    - name: Start server
-      run: npm start &
+      working-directory: LOGIN-SIGNUP/login-signup
 
     - name: Run Playwright Tests
-      run: npm run test:e2e 
+      run: npx playwright test
 
     - name: Generate code coverage
-      run: npm run coverage 
+      run: npm run coverage
 
