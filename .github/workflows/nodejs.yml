@@ -19,10 +19,14 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: /home/runner/work/ccny-bus-track/ccny-bus-track/LOGIN-SIGNUP/login-signup
+      working-directory: LOGIN-SIGNUP/login-signup
 
-    - name: Build the project
-      run: npm start
+    - name: Build the app
+      run: npm run build
+      working-directory: LOGIN-SIGNUP/login-signup
+
+    - name: Run e2e tests
+      run: npm run ci:e2e
       working-directory: LOGIN-SIGNUP/login-signup
 
     - name: Run tests
