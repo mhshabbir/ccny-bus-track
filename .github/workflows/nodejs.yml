@@ -38,5 +38,5 @@ jobs:
       working-directory: LOGIN-SIGNUP/login-signup
 
     - name: Generate code coverage
-      run: npm run coverage
+      run: npm test --coverage
 
