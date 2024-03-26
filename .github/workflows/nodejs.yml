@@ -23,7 +23,7 @@ jobs:
 
     - name: Build the project
       run: npm start
-      working-directory: home/runner/work/ccny-bus-track/ccny-bus-track/LOGIN-SIGNUP/login-signup
+      working-directory: LOGIN-SIGNUP/login-signup
 
 
     - name: Run tests
