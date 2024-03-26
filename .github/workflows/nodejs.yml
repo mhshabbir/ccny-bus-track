@@ -19,11 +19,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: C:\Users\Shabb\OneDrive - The City College of New York\Desktop\211\Topics\ccny-bus-track\LOGIN-SIGNUP\login-signup
+      working-directory: /home/runner/work/ccny-bus-track/ccny-bus-track/LOGIN-SIGNUP/login-signup
 
     - name: Build the project
       run: npm start
-      working-directory: C:\Users\Shabb\OneDrive - The City College of New York\Desktop\211\Topics\ccny-bus-track\LOGIN-SIGNUP\login-signup
+      working-directory: home/runner/work/ccny-bus-track/ccny-bus-track/LOGIN-SIGNUP/login-signup
 
 
     - name: Run tests
