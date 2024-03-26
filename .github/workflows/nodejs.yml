@@ -25,16 +25,13 @@ jobs:
       run: npm run build
       working-directory: LOGIN-SIGNUP/login-signup
 
-    - name: Run e2e tests
-      run: npm run ci:e2e
-      working-directory: LOGIN-SIGNUP/login-signup
-
     - name: Run tests
       run: npm test 
       working-directory: LOGIN-SIGNUP/login-signup
 
     - name: Run Playwright Tests
       run: npx playwright test
+      working-directory: LOGIN-SIGNUP/login-signup
 
     - name: Generate code coverage
       run: npm run coverage
