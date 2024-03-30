@@ -1,0 +1,56 @@
+name: Capture Metrics
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run daily
+  workflow_dispatch: # Allows manual trigger
+  pull_request:
+    types: [closed]
+    branches: [ main, master ]
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub pandas matplotlib
+      
+      # Fetch and calculate the number of commits per pull request
+      - name: Calculate Number of Commits per PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/calculate_commits_per_pr.py
+      
+      # Calculate the average time for PR reviews
+      - name: Calculate Average Time for PR Review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/calculate_average_review_time.py
+      
+      # Calculate the number of comments on each PR
+      - name: Calculate Number of Comments per PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/calculate_comments_per_pr.py
+      
+      # Track the number of PRs each contributor has reviewed
+      - name: Track PR Reviews per Contributor
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/track_pr_reviews_per_contributor.py
+      
+      # Upload metrics report or visualization
+      - uses: actions/upload-artifact@v4
+        with:
+          name: metrics-report
+          path: metrics-report/
+          retention-days: 7
