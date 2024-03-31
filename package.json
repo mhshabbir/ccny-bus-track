@@ -1,0 +1,19 @@
+{
+  "name": "ccny-bus-track",
+  "version": "1.0.0",
+  "description": "CCNY Bus Tracker will be a web application that will display a map of CCNY bus tracks and their estimated time of arrival. It will also provide weather information on whether the buses are running or not.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"node server.js\" \"node updateBusLocation.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^6.5.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

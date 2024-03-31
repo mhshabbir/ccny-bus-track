@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Real-time Bus Location Tracking</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'your_mapbox_access_token_here';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-73.949699, 40.819938], // Initial center point
+            zoom: 14 // Initial zoom level
+        });
+
+        map.on('load', () => {
+            map.addSource('bus', { 
+                type: 'geojson', 
+                data: {
+                    type: 'Point',
+                    coordinates: [-73.949699, 40.819938] // Initial location
+                } 
+            });
+            map.addLayer({
+                'id': 'bus',
+                'type': 'symbol',
+                'source': 'bus',
+                'layout': { 
+                    'icon-image': 'bus-15', // Use a bus icon from Mapbox's Maki icon set
+                    'icon-size': 1.5 
+                }
+            });
+
+            const fetchBusLocation = async () => {
+                try {
+                    const response = await fetch('http://localhost:3000/busLocation');
+                    const data = await response.json();
+                    const coordinates = [data.lng, data.lat]; // Make sure this matches the format your backend sends
+                    map.getSource('bus').setData({
+                        type: 'Point',
+                        coordinates: coordinates
+                    });
+                    map.flyTo({ center: coordinates, speed: 0.5 });
+                } catch (error) {
+                    console.error('Failed to fetch bus location:', error);
+                }
+            };
+
+            // Fetch the bus location every 2 seconds
+            setInterval(fetchBusLocation, 2000);
+        });
+    </script>
+</body>
+</html>
