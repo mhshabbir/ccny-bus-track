@@ -15,7 +15,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "coverage": "npm test --coverage"
+    "coverage": "npm test --coverage",
+    "start:ci": "serve -s build",
+    "ci:e2e": "start-server-and-test start:ci http://localhost:5000 npx playwright test"
   },
   "eslintConfig": {
     "extends": [
@@ -36,10 +38,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@playwright/test": "^1.42.1",
     "@testing-library/react": "^14.2.2",
     "@types/node": "^20.11.30",
     "jest": "^27.5.1",
-    "react-test-renderer": "^18.2.0"
+    "react-test-renderer": "^18.2.0",
+    "start-server-and-test": "^2.0.3"
   }
 }
