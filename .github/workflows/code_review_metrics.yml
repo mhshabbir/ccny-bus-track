@@ -2,11 +2,11 @@ name: Capture Metrics
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Run daily
-  workflow_dispatch: # Allows manual trigger
+    - cron: '0 0 * * *' # Run daily at midnight
+  workflow_dispatch: # Allows manual triggering
   pull_request:
     types: [closed]
-    branches: [ main, master ]
+    branches: [ main, master ] # Run on closing PRs against main or master
 
 jobs:
   metrics:
@@ -30,9 +30,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/generate_metrics_report.py
       
-      # Upload the compiled metrics report
+      # Upload the generated metrics report images
       - uses: actions/upload-artifact@v4
         with:
-          name: metrics-report
-          path: code_review_metrics.pdf
+          name: metrics-report-images
+          path: |
+            commits_per_branch.png
+            pr_review_time_trend.png
+            pr_duration_by_author.png
+            pr_comments_by_author.png
+            comments_by_contributor.png
           retention-days: 30

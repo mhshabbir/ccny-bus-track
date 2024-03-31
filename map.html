@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Real-time Bus Location Tracking</title>
+    <title>Real-time Location Tracking</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
@@ -14,49 +14,48 @@
 <body>
     <div id="map"></div>
     <script>
-        mapboxgl.accessToken = 'your_mapbox_access_token_here';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXh0YXN5MTIzIiwiYSI6ImNsdHRrYXEwaDB0bmQya3BlZzUzNWNucWQifQ.i-4dUpV8L9VDTd1bsJYIFw';
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [-73.949699, 40.819938], // Initial center point
-            zoom: 14 // Initial zoom level
+            center: [-73.949775, 40.820287], // Center the map around the general area of interest
+            zoom: 14 // Zoom level adjusted for better visualization
         });
 
         map.on('load', () => {
-            map.addSource('bus', { 
-                type: 'geojson', 
-                data: {
-                    type: 'Point',
-                    coordinates: [-73.949699, 40.819938] // Initial location
-                } 
-            });
+            // Initialize the GPS point on the map without setting its coordinates yet
+            map.addSource('gps', { type: 'geojson', data: { type: 'Point', coordinates: [-73.949775, 40.820287] } });
             map.addLayer({
-                'id': 'bus',
+                'id': 'gps',
                 'type': 'symbol',
-                'source': 'bus',
+                'source': 'gps',
                 'layout': { 
-                    'icon-image': 'bus-15', // Use a bus icon from Mapbox's Maki icon set
-                    'icon-size': 1.5 
-                }
+			        'icon-image': 'bus-15', // Assuming 'bus-15' is a valid icon in Mapbox, change as necessary
+			        'icon-size' : 1.5 
+			    }
             });
 
-            const fetchBusLocation = async () => {
-                try {
-                    const response = await fetch('http://localhost:3000/busLocation');
-                    const data = await response.json();
-                    const coordinates = [data.lng, data.lat]; // Make sure this matches the format your backend sends
-                    map.getSource('bus').setData({
-                        type: 'Point',
-                        coordinates: coordinates
-                    });
-                    map.flyTo({ center: coordinates, speed: 0.5 });
-                } catch (error) {
-                    console.error('Failed to fetch bus location:', error);
-                }
-            };
+            // Function to update bus location
+            function updateBusLocation() {
+                fetch('/api/bus-info') // Adjust this URL to your actual API endpoint
+                    .then(response => response.json())
+                    .then(data => {
+                        const coordinates = [data.nextStopCoords[0], data.nextStopCoords[1]];
+                        // Update the map with the new location
+                        map.getSource('gps').setData({
+                            type: 'Point',
+                            coordinates: coordinates
+                        });
+                        map.flyTo({ center: coordinates, speed: 0.5 });
 
-            // Fetch the bus location every 2 seconds
-            setInterval(fetchBusLocation, 2000);
+                        // Update the document title with the direction
+                        document.title = `Bus Direction: ${data.direction}`;
+                    })
+                    .catch(error => console.error('Error fetching bus location:', error));
+            }
+
+            // Update bus location every 2 seconds
+            setInterval(updateBusLocation, 2000);
         });
     </script>
 </body>
