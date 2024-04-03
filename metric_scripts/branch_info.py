@@ -1,3 +1,9 @@
+from github import Github
+import matplotlib.pyplot as plt
+import numpy as np
+from collections import defaultdict
+import os
+
 def branch_commits_info(repo):
     branches = repo.get_branches()
     branch_names = []

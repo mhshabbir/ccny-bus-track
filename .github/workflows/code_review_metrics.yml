@@ -40,4 +40,5 @@ jobs:
             pr_duration_by_author.png
             pr_comments_by_author.png
             comments_by_contributor.png
+            cr_metrics.png
           retention-days: 30
