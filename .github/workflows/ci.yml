@@ -1,0 +1,53 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x] # Ensure this matches your project's Node.js version
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: hw2/package-lock.json
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./hw2
+
+      - name: Build
+        run: npm run build
+        working-directory: ./hw2
+
+      - name: Run Unit Tests
+        run: npm run test
+        working-directory: ./hw2
+
+      - name: Generate Code Coverage Report
+        run: npx vitest run --coverage
+        working-directory: ./hw2
+
+      - name: Launch Application for Preview
+        run: npm run preview &
+        working-directory: ./hw2
+
+      - name: Wait for Application to Start
+        run: sleep 10 # Waits for 10 seconds; adjust this as needed
+        working-directory: ./hw2
+
+      - name: Execute End-to-End Tests
+        run: npx cypress run
+        working-directory: ./hw2
+
+      - name: Check if Application is Up # Optional step for debugging
+        run: curl http://localhost:4173 # Make sure this matches the port used by your application
+        working-directory: ./hw2
