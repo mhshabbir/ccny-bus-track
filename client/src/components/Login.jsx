@@ -5,7 +5,6 @@ import './Login.css'
 import { supabase } from '../../../server/client';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login( {setToken} ) {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
