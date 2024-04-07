@@ -1,0 +1,131 @@
+/* .loginContainer {
+    width: 350px; 
+    padding: 20px;
+    margin: 100px auto; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .loginContainer h2 {
+    text-align: center;
+    color: #f500b4;
+    font-style: italic;
+  }
+  
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    display: block;
+    color: #666;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="confirm-password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #004494;
+  }
+  
+  .errorMessage {
+    color: red;
+    margin-top: 10px;
+  } */
+
+  .loginContainerR {
+    width: 1000px; 
+    height: 400px;
+    padding: 20px;
+    margin: 100px auto; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #f9f9f9;
+  }
+  
+  .loginContainerR h2 {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 30px;
+    color: #000000;
+    font-style: italic;
+  }
+  
+  .loginFormR {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* .inputGroup {
+    display: flex;
+  } */
+  .inputGroupR {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two columns of equal width */
+    grid-gap: 20px; /* Adjusts the gap between grid items */
+    margin-bottom: 20px; /* Optional: Adds some space below the grid before the error message or button */
+  }
+  
+  .formGroupR {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    width: 450px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    display: block;
+    color: #666;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    color: #000000;
+  }
+  
+  .loginFormR button {
+    margin-top: 40px;
+    width: 200px;
+    background-color: rgb(145, 59, 195);
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .errorMessage {
+    color: red;
+  }
