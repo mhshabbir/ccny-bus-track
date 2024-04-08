@@ -1,7 +1,7 @@
 # CCNY Bus Tracker Architecture
 
 ## High Level View
-!System Architecture[systemArchitecture.jpg]
+![System Architecture](systemArchitecture.jpg)
 
 The **User Interface** is where users interact with the application. They can see the bus tracks, estimated time of arrival, and weather information. They can also log in to access user-specific features.
 
@@ -13,7 +13,7 @@ The **MapBox API** is used by the application to display maps on the User Interf
 
 
 ## Entities and Relationships
-!ER Diagram[erDiagram.jpg]
+![ER Diagram](erDiagram.jpg)
 
 ### Bus Entity
 This entity represents the buses being tracked. It has `BusID`, coordinates for `CurrentLocation`, and `PreviousLocation`, as well as the `NextStop`, and `LastStop`.
@@ -28,7 +28,7 @@ In this relationship, `NextStop` and `LastStop` in the Bus entity are foreign ke
 
 
 ## Call Sequence for Map Tracking Feature
-!Call Sequence Diagram[callSeq.jpg]
+![Call Sequence Diagram](callSeq.jpg)
 1. **User Interaction**: The user selects a bus to track on the User Interface (UI).
 2. **UI to Server Request**: The UI sends a request to the Application Server, including the `BusID` of the selected bus.
 3. **Server to Database Query**: The Application Server queries the Database for the current location of the selected bus using the `BusID`.
