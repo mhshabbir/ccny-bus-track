@@ -13,15 +13,10 @@ function atStop(current_coord) {
     const distanceToStation145 = getDistance.calculateEuclideanDistance(current_coord, station145);
 
     // Check if current coordinate is within radius of each stop
-    if (distanceToSchool <= radius) {
-        return "School";
-    } else if (distanceToStation125 <= radius) {
-        return "125th Station";
-    } else if (distanceToStation145 <= radius) {
-        return "145th Station";
-    } else {
-        return false;
-    }
+    if (distanceToSchool <= radius) { return "CCNY"; } 
+    else if (distanceToStation125 <= radius) { return "125"; } 
+    else if (distanceToStation145 <= radius) { return "145"; } 
+    else { return false; }
 }
 
 module.exports = { atStop };
