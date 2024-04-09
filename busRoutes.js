@@ -61,4 +61,22 @@ const route_145_CCNY = [
     [-73.949775, 40.819798] // school
 ]
 
-module.exports = { schoolCoord, station125, station145, route_125_CCNY, route_CCNY_125, route_145_CCNY, route_CCNY_145 };
+// Add the time it takes for the bus to complete each route
+const route_CCNY_125_time = route_CCNY_125.length;
+const route_125_CCNY_time = route_125_CCNY.length;
+const route_CCNY_145_time = route_CCNY_145.length;
+const route_145_CCNY_time = route_145_CCNY.length;
+
+module.exports = { 
+    schoolCoord, 
+    station125, 
+    station145, 
+    route_CCNY_125, 
+    route_125_CCNY, 
+    route_CCNY_145, 
+    route_145_CCNY, 
+    route_CCNY_125_time, 
+    route_125_CCNY_time, 
+    route_CCNY_145_time, 
+    route_145_CCNY_time 
+};
