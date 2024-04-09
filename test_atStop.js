@@ -11,10 +11,20 @@ function testAtStop(route) {
     });
 }
 
-console.log("Testing route 145:");
-testAtStop(busRoutes.route145);
+console.log("Testing route 145 to CCNY:");
+testAtStop(busRoutes.route_145_CCNY);
 
 console.log("-----------------------------------------------------------")
 
-console.log("Testing route 125:");
-testAtStop(busRoutes.route125);
+console.log("Testing route CCNY to 145:");
+testAtStop(busRoutes.route_CCNY_145);
+
+console.log("-----------------------------------------------------------")
+
+console.log("Testing route 125 to CCNY:");
+testAtStop(busRoutes.route_125_CCNY);
+
+console.log("-----------------------------------------------------------")
+
+console.log("Testing route CCNY to 125:");
+testAtStop(busRoutes.route_CCNY_145);

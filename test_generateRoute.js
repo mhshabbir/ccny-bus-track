@@ -9,5 +9,5 @@ function testGenerateRoute(route, numPoints) {
     console.log(sampleRoutePoints);
 }
 
-console.log("Testing route generation for route 145:");
-testGenerateRoute(busRoutes.route145, 5);
+console.log("Testing route generation for route 145 to CCNY:");
+testGenerateRoute(busRoutes.route_145_CCNY, 5);

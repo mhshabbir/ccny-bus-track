@@ -25,10 +25,10 @@ function testGetDestination(route, schoolCoord) {
     }
 }
 
-console.log("Testing route 145:");
-testGetDestination(busRoutes.route145, busRoutes.schoolCoord);
+console.log("Testing route 145 to CCNY:");
+testGetDestination(busRoutes.route_145_CCNY, busRoutes.schoolCoord);
 
 console.log("-----------------------------------------------------------")
 
-console.log("Testing route 125:");
-testGetDestination(busRoutes.route125, busRoutes.schoolCoord);
+console.log("Testing route 125 to CCNY:");
+testGetDestination(busRoutes.route_125_CCNY, busRoutes.schoolCoord);

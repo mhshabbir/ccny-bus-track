@@ -8,10 +8,10 @@ function testGetRoute(route) {
     }
 }
 
-console.log("Testing getRoute for route 145:");
-testGetRoute(busRoutes.route145);
+console.log("Testing getRoute for route 145 to CCNY:");
+testGetRoute(busRoutes.route_145_CCNY);
 
 console.log("-----------------------------------------------------------")
 
-console.log("Testing getRoute for route 125:");
-testGetRoute(busRoutes.route125);
+console.log("Testing getRoute for route 125 to CCNY:");
+testGetRoute(busRoutes.route_125_CCNY);
