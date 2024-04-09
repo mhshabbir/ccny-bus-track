@@ -53,4 +53,4 @@ const route145 = [
     [-73.949775, 40.819798] // school
 ];
 
-export { route125, route145 };
+module.exports = { schoolCoord, station125, station145, route125, route145 };
