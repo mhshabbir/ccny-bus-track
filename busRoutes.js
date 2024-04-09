@@ -64,10 +64,10 @@ const route_145_CCNY = [
 ]
 
 // estimating bus takes 1 min to travel btwn each coord so route time is len of coords arr
-const route_CCNY_125_time = route_CCNY_125.length;
-const route_125_CCNY_time = route_125_CCNY.length;
-const route_CCNY_145_time = route_CCNY_145.length;
-const route_145_CCNY_time = route_145_CCNY.length;
+const route_CCNY_125_time = route_CCNY_125.length - 1;
+const route_125_CCNY_time = route_125_CCNY.length - 1;
+const route_CCNY_145_time = route_CCNY_145.length - 1;
+const route_145_CCNY_time = route_145_CCNY.length - 1;
 
 
 module.exports = { 
