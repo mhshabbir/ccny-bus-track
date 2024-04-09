@@ -1,4 +1,6 @@
 function calculateManhattanDistance(coord1, coord2) {
+    console.log(coord1[0], coord2);
+
     // Calculate Manhattan distance (L1 distance)
     return Math.abs(coord1[0] - coord2[0]) + Math.abs(coord1[1] - coord2[1]);
 }

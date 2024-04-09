@@ -1,7 +1,9 @@
+// appx coords of school and stations
 const schoolCoord = [-73.949775, 40.819798]
 const station125 = [-73.945460, 40.807812]
 const station145 = [-73.944914, 40.824003]
 
+// appx coords of stop signs/lights along route bus travels 
 const route_CCNY_125 = [
     [-73.949774, 40.819598], // School
     [-73.950853, 40.818407],
@@ -61,11 +63,12 @@ const route_145_CCNY = [
     [-73.949775, 40.819798] // school
 ]
 
-// Add the time it takes for the bus to complete each route
+// estimating bus takes 1 min to travel btwn each coord so route time is len of coords arr
 const route_CCNY_125_time = route_CCNY_125.length;
 const route_125_CCNY_time = route_125_CCNY.length;
 const route_CCNY_145_time = route_CCNY_145.length;
 const route_145_CCNY_time = route_145_CCNY.length;
+
 
 module.exports = { 
     schoolCoord, 

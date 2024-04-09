@@ -1,6 +1,12 @@
+const { schoolCoord } = require('./busRoutes');
 const getDistance = require('./getDistance')
 
-function getDestination(currentCoord, previousCoord, schoolCoord) {
+
+// gets destination of a bus using its curr and prev coords
+// calculates distance of bus and checks if it is getting further away from school
+// if so it must be traveling to a station, else it is returning
+function getDestination(currentCoord, previousCoord) {
+    const schoolCoord = [-73.949775, 40.819798]
     // Calculate distances
     const manhattanCurrentDistance = getDistance.calculateManhattanDistance(currentCoord, schoolCoord);
     const manhattanPreviousDistance = getDistance.calculateManhattanDistance(previousCoord, schoolCoord);
