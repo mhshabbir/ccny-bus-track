@@ -27,4 +27,4 @@ testAtStop(busRoutes.route_125_CCNY);
 console.log("-----------------------------------------------------------")
 
 console.log("Testing route CCNY to 125:");
-testAtStop(busRoutes.route_CCNY_145);
+testAtStop(busRoutes.route_CCNY_125);
