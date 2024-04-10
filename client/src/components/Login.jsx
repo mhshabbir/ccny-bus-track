@@ -5,7 +5,7 @@ import './Login.css'
 import { supabase } from '../../../server/client';
 import { useNavigate } from 'react-router-dom';
 
-function Login( {setToken} ) {
+function Login( {setToken, setIsLoggedIn} ) {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
       email:'',
@@ -38,6 +38,7 @@ function Login( {setToken} ) {
       if (error) throw error
       console.log(data)
       {setToken(data)}
+      setIsLoggedIn(true)
       navigate('/home')
 
 
