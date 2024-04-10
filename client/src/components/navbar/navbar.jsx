@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import './style.css'
+import './navbar.css'
 
 const navbar = ({setToken, isLoggedIn, setIsLoggedIn}) => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const navbar = ({setToken, isLoggedIn, setIsLoggedIn}) => {
       </a>
       <a href="/qrcode">My QR Code</a>
       {isLoggedIn ? (
-        <button onClick={handleLogout} style={{ border: 'none', background: 'none' }}>
+        <button className='logoutButton23' onClick={handleLogout}>
           Logout
         </button>
       ) : (

@@ -9,6 +9,7 @@ import Street145 from './pages/Street145'
 import Login from './components/Login'
 import Navbar from './components/navbar/navbar'
 import QrCode from './pages/QrCode'
+import UserProfile from './pages/UserProfile'
 
 const App = () => {
   let navigate = useNavigate()
@@ -33,7 +34,7 @@ const App = () => {
       <Routes>
         <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/>
         {token?<Route path='/' element={<LoginPage setToken={setToken}/>}/> : <Route path='/' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/> }
-        <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/>
+        {/* <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/> */}
         <Route path='/signup' element={<RegisterPage/>} />
         <Route path='/qrcode' element={<QrCode/>} />
         {token?<Route path='/home' element={<HomePage />}/>:""}

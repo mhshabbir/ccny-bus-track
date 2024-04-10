@@ -55,44 +55,44 @@ function Register({testing, setTesting}) {
 
 
     return (
-          <>
-            <div className="loginContainerR">
-              <h2>
-                <span
-                  role="button"
-                  onClick={handleRegisterClick}
-                  style={{ color: 'purple', cursor: 'pointer', textDecoration: 'underline' }}
-                  onKeyDown={handleRegisterClick}
-                  tabIndex={0} // Make it focusable
-                >
-                  Login
-                </span>
-                {' or Register'}
-              </h2>
-              <form className="loginFormR" onSubmit={handleSubmit}>
-                <div className="inputGroupR">
-                <div className="formGroupR">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" onChange={handleChange} />
-                  </div>
-                  <div className="formGroupR">
-                    <label htmlFor="email">Email</label>
-                    <input type="text" id="email" name="email" onChange={handleChange} />
-                  </div>
-                  <div className="formGroupR">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" onChange={handleChange} />
-                  </div>
-                  <div className="formGroupR">
-                    <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" onChange={handleChange} />
-                  </div>
-                </div>
-                {error && <div className="errorMessage">{error}</div>}
-                <button type="submit">Register</button> {/* Removed onClick here, using form's onSubmit instead */}
-              </form>
+      <>
+        <div className="loginContainerR">
+          <h2>
+            <span
+              role="button"
+              onClick={handleRegisterClick}
+              style={{ color: 'purple', cursor: 'pointer', textDecoration: 'underline' }}
+              onKeyDown={handleRegisterClick}
+              tabIndex={0} // Make it focusable
+            >
+              Login
+            </span>
+            {' or Register'}
+          </h2>
+          <form className="loginFormR" onSubmit={handleSubmit}>
+            <div className="inputGroupR">
+            <div className="formGroupR">
+                <label htmlFor="username">Username</label>
+                <input type="text" id="username" name="username" onChange={handleChange} />
+              </div>
+              <div className="formGroupR">
+                <label htmlFor="email">Email</label>
+                <input type="text" id="email" name="email" onChange={handleChange} />
+              </div>
+              <div className="formGroupR">
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" name="password" onChange={handleChange} />
+              </div>
+              <div className="formGroupR">
+                <label htmlFor="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" onChange={handleChange} />
+              </div>
             </div>
-          </>
+            {error && <div className="errorMessage">{error}</div>}
+            <button type="submit">Register</button> {/* Removed onClick here, using form's onSubmit instead */}
+          </form>
+        </div>
+      </>
     )
 }
 
