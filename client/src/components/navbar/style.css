@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap'); */
 
 /* * {
   margin: 0;
@@ -11,7 +11,7 @@ body {
   background: #ffffff;
 } */
 
-.nav-links {
+/* .nav-links {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -83,4 +83,42 @@ body {
 .nav-links li.logo img {
     width: 180px;  
     height: auto;
+} */
+
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #7e57c6;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.navbar {
+  position: fixed; /* or absolute */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Use viewport width */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.navbar img {
+  width: 75px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 0 15px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+  color: white;
 }
