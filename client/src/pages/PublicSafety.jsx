@@ -36,7 +36,7 @@ function PublicSafety({token}) {
                         />
                     </form>
                 </div>
-                <a href={`mailto:$PUBLICSAFETY@CCNY.CUNY.EDU?subject=Concerns & Reports&body=${emailContent}`}>Report Issues</a>
+                <a href={`mailto:PUBLICSAFETY@CCNY.CUNY.EDU?subject=Concerns & Reports&body=${emailContent}`}>Report Issues</a>
                 
 
 
