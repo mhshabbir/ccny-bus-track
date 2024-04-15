@@ -12,10 +12,17 @@ const getWaitTime = require('./getWaitTime.js');
 
 const bus = {
     id: 1,
-    currentCoord: busRoutes.route_CCNY_145[0],
+    currentCoord: busRoutes.route_CCNY_145[0], // at ccny stop
     nextStop: '145',
     previousStop: 'CCNY'
-};
+}; // shows waittime for 145 
+
+// const bus = {
+//     id: 1,
+//     currentCoord: [ -73.94545, 40.822777 ],
+//     nextStop: '145',
+//     previousStop: 'CCNY'
+// };
 
 // Test function
 function test_getWaitTime(bus) {

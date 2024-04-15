@@ -11,8 +11,8 @@ function interpolatePoints(coord1, coord2, numPoints) {
     // Iterate to generate interpolated points
     for (let i = 1; i < numPoints; i++) {
         // Generate random error proportional to the difference
-        const latError = latDiff * (Math.random() * 0.2 - 0.1); // Random error
-        const lonError = lonDiff * (Math.random() * 0.2 - 0.1); 
+        const latError = latDiff * (Math.random() * 0.002 - 0.001); // Random error
+        const lonError = lonDiff * (Math.random() * 0.002 - 0.001); 
         // Calculate the latitude and longitude of the interpolated point with random error
         const lat = parseFloat((coord1[0] + latDiff * i + latError).toFixed(6));
         const lon = parseFloat((coord1[1] + lonDiff * i + lonError).toFixed(6));

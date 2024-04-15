@@ -1,3 +1,4 @@
+// coords built for mapbox, flip for google maps
 // appx coords of school and stations
 const schoolCoord = [-73.949775, 40.819798]
 const station125 = [-73.945460, 40.807812]
