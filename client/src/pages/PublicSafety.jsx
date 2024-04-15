@@ -18,7 +18,7 @@ function PublicSafety({token}) {
     <>
    
         <div className="App">
-            <h1 className={styles.header}>My Profile</h1>
+            <h1 className={styles.header}>Public Safety</h1>
             <div className={styles.inputContainer}>
                 <div className={styles.contentContainerP}>
                     <div className={styles.textContainer}>
