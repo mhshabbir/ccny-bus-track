@@ -36,7 +36,10 @@ function PublicSafety({token}) {
                         />
                     </form>
                 </div>
-                <button onClick={handleSubmit}>Send Email</button>
+                <a href={`mailto:$PUBLICSAFETY@CCNY.CUNY.EDU?subject=Concerns & Reports&body=${emailContent}`}>Report Issues</a>
+                
+
+
             </div>
         </div> 
     </>
