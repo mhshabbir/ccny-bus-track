@@ -17,7 +17,7 @@ function PublicSafety({token}) {
     <>
    
         <div className="App">
-            <h1 className={styles.header}>My Profile</h1>
+            <h1 className={styles.header}>Public Safety</h1>
             <div className={styles.inputContainer}>
                 <div className={styles.contentContainer}>
                     <div className={styles.textContainer}>
@@ -25,10 +25,10 @@ function PublicSafety({token}) {
                         <h3>Student Id: 123456789 </h3>
                         <h3>Email address: {token.user.email}</h3>
                     </div>
-                        <form className="loginForm" onSubmit={handleSubmit}>
-            
-                    </form>
                 </div>
+                <form className="loginForm" onSubmit={handleSubmit}>
+                        <input />
+                </form>
                 <button onClick={handleSubmit}>Send Email</button>
             </div>
         </div> 
