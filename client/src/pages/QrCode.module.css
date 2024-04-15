@@ -55,3 +55,24 @@
 .ccnyimg {
     width: 250px;
  }
+
+ .largeInput {
+  width: 500px;  /* Full width of its container */
+  height: 200px;
+  padding: 12px 20px;  /* Ample padding */
+  margin: 8px 0;  /* Margin for spacing */
+  display: inline-block;
+  border: 1px solid #ccc;  /* Subtle border */
+  border-radius: 4px;  /* Rounded borders */
+  box-sizing: border-box;  /* Helps include padding in width */
+}
+
+.contentContainerP {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  color: black;
+  font-size: 28px;
+}
