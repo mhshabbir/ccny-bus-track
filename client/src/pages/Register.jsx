@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js'
 import './Register.css'
 
+
 function Register() {
-  const apikey = process.env.REACT_APP_SUPABASEKEY
-  const apiurl = process.env.REACT_APP_SUPABASEURL
-  const supabase = createClient(apiurl, apikey)
+  // const supabase = createClient(process.env.REACT_APP_SUPABASEURL, process.env.REACT_APP_SUPABASEKEY)
+  const supabase = createClient("https://ziapwogxrlinwnniaiey.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InppYXB3b2d4cmxpbndubmlhaWV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE2NjQ0NDEsImV4cCI6MjAyNzI0MDQ0MX0.U3LGBYbIU527Anwv9ceNgVws5a7N9xBmhJRmilQjbb0")
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
