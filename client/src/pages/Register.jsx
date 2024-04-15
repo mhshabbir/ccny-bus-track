@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { supabase } from '../../../server/client';
 import { useNavigate } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js'
 import './Register.css'
 
 function Register() {
+  const apikey = process.env.REACT_APP_SUPABASEKEY
+  const apiurl = process.env.REACT_APP_SUPABASEURL
+  const supabase = createClient(apiurl, apikey)
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
