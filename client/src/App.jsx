@@ -10,6 +10,8 @@ import Login from './components/Login'
 import Navbar from './components/navbar/navbar'
 import QrCode from './pages/QrCode'
 import UserProfile from './pages/UserProfile'
+import PublicSafety from './pages/PublicSafety'
+
 
 const App = () => {
   let Navigate = useNavigate()
@@ -39,6 +41,7 @@ const App = () => {
         <Route path='/ccny' element={<Ccny token={token} />}/>
         <Route path='/Street125' element={<Street125 token={token} />}/>
         <Route path='/Street145' element={<Street145 token={token} />}/>
+        <Route path='/publicsafety' element={<PublicSafety token={token} />}/>
       </Routes>
     </>
   )
