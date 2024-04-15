@@ -12,9 +12,8 @@ import QrCode from './pages/QrCode'
 import UserProfile from './pages/UserProfile'
 
 const App = () => {
-  let navigate = useNavigate()
+  let Navigate = useNavigate()
   const [token, setToken] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   if(token){
     sessionStorage.setItem('token', JSON.stringify(token))
@@ -25,26 +24,29 @@ const App = () => {
       let data = JSON.parse(sessionStorage.getItem('token'))
       setToken(data)
     }
-  }, [])
+  },[])
 
 
   return (
     <>
-      <Navbar setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Navbar token={token} setToken={setToken}/>
       <Routes>
-        <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/>
-        {token?<Route path='/' element={<LoginPage setToken={setToken}/>}/> : <Route path='/' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/> }
-        {/* <Route path='/login' element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>}/> */}
+        <Route path='/' element={<HomePage token={token} />}/>
+        <Route path='/login' element={<Login setToken={setToken}/>}/>
         <Route path='/signup' element={<RegisterPage/>} />
-        <Route path='/qrcode' element={<QrCode/>} />
-        {token?<Route path='/home' element={<HomePage />}/>:""}
-        {token?<Route path='/CCNY' element={<Ccny/>}/>:""}
-        {token?<Route path='/Street125' element={<Street125/>}/>:""}
-        {token?<Route path='/Street145' element={<Street145/>}/>:""}
+        <Route path='/qrcode' element={<QrCode token={token}/>} />
+        <Route path='/home' element={<HomePage token={token} />}/>
+        <Route path='/ccny' element={<Ccny token={token} />}/>
+        <Route path='/Street125' element={<Street125 token={token} />}/>
+        <Route path='/Street145' element={<Street145 token={token} />}/>
       </Routes>
     </>
   )
 }
 
 export default App
+
+
+
+
 

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import './Street.css'
 
-function Ccny() {
+function Ccny({token}) {
   const navigate = useNavigate();
+
+  if(!token){
+    return <Navigate  to="/" replace={true}/>
+  }
+
 
   return (
     <>

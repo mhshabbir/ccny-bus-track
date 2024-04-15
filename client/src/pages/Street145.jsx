@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import './Street.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
-function Street145() {
+function Street145({token}) {
   const navigate = useNavigate();
   const [currPage, setCurrPage] = useState('125')
 
   const handleHomeClick = () => {
     setCurrPage('Home')
     navigate('/Home')
+  }
+
+  if(!token){
+    return <Navigate  to="/login" replace={true}/>
   }
 
   return (

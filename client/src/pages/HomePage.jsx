@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './Street.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
-function HomePage() {
+function HomePage({token}) {
   const navigate = useNavigate()
+
+  if(!token){
+    return <Navigate  to="/login" replace={true}/>
+  }
 
   return (
     <>

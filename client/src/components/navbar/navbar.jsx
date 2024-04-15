@@ -1,39 +1,41 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'
 
-const navbar = ({setToken, isLoggedIn, setIsLoggedIn}) => {
+const navbar = ({token, setToken}) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setToken(false); 
-    setIsLoggedIn(false)
-    navigate('/');
-    // console.log("This is token: ")
-    // console.log(token)
-    // console.log("test")
-    // console.log(token)
+    // console.log('token')
+    sessionStorage.removeItem('token');
+    setToken(false);
+    // console.log({token})
+    navigate('/login');
   };
 
 
   return (
     <nav className="navbar">
-      <a href="/">Home</a>
-      <a href="/publicsafety">Public Safety</a>
-      <a href="/ccny">
+      <Link to="/">Home</Link>
+      <Link to="/publicsafety">Public Safety</Link>
+      <Link to="/ccny">
         <img src="https://www.ccny.cuny.edu/sites/default/files/styles/600px_wide/public/2023-06/ColinPowellSchool_CCNY_Economics%26Business_GuestFaculty_DemetriosPapacostasNoPhoto.png?itok=5r-pw_fF" alt="Street 125" />
-      </a>
-      <a href="/qrcode">My QR Code</a>
-      {isLoggedIn ? (
+      </Link>
+      <Link to="/qrcode">My QR Code</Link>
+      {token ? (
         <button className='logoutButton23' onClick={handleLogout}>
           Logout
         </button>
       ) : (
-        <a href="/">Login/Signup</a>
+        <Link to="/login">
+        Login/Signup
+        </Link>
       )}
     </nav>
   )
 }
 
 export default navbar
+
+
 
