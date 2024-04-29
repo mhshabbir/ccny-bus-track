@@ -20,6 +20,15 @@ jobs:
       with:
         terraform_version: '1.8.2' 
 
+    - name: Check AWS Credentials
+      run: | 
+        if [ -z "${{ secrets.TERRAFORM_AWS_ACCESS_KEY_ID }}" ] || [ -z "${{ secrets.TERRAFORM_AWS_SECRET_ACCESS_KEY }}" ]; then
+          echo "AWS credentials are not set"
+          exit 1
+        else
+          echo "AWS credentials are set"
+        fi
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -37,4 +46,6 @@ jobs:
       run: terraform plan
 
     - name: Terraform Apply
+      env:
+        TF_LOG: DEBUG
       run: terraform apply -auto-approve
