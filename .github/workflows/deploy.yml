@@ -1,42 +1,52 @@
-name: Build and Deploy
+name: Deploy Application
 
 on:
   push:
     branches:
       - assignment10
-    paths:
-      - 'client/**'
-      - 'server/**'
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '15'  
 
-      - name: Install dependencies
-        run: |
-          cd client && npm install
-          cd ../server && npm install
+    - name: Install Dependencies
+      run: npm install
 
-      - name: Build application
-        run: |
-          cd client && npm run build
+    - name: Build Application
+      run: npm run build 
 
-      - name: Zip application files
-        run: |
-          cd ..
-          zip -r application-${{ github.sha }}.zip client/build server
+    - name: Archive Application
+      run: zip -r bustrack-${{ github.run_id }}.zip ./dist  
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: application-${{ github.sha }}
-          path: application-${{ github.sha }}.zip
+    - name: Upload ZIP to Artifact Storage
+      uses: actions/upload-artifact@v2
+      with:
+        name: bustrack-deployment-package
+        path: bustrack-${{ github.run_id }}.zip
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+        aws-region: us-east-2  
+
+    - name: Upload Application to S3
+      run: aws s3 cp bustrack-${{ github.run_id }}.zip s3://terraform-state-bustrack-quodfinis/bustrack-${{ github.run_id }}.zip
+
+    - name: Create Application Version
+      run: |
+        aws elasticbeanstalk create-application-version --application-name bustrack \
+        --version-label bustrack-${{ github.run_id }} --source-bundle S3Bucket="terraform-state-bustrack-quodfinis",S3Key="bustrack-${{ github.run_id }}.zip"
+
+    - name: Update Elastic Beanstalk Environment
+      run: aws elasticbeanstalk update-environment --environment-name bustrack-env --version-label bustrack-${{ github.run_id }}
+
