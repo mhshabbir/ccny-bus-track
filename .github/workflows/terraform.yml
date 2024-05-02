@@ -22,7 +22,7 @@ jobs:
 
     - name: Check AWS Credentials
       run: | 
-        if [ -z "${{ secrets.TERRAFORM_AWS_ACCESS_KEY_ID }}" ] || [ -z "${{ secrets.TERRAFORM_AWS_SECRET_ACCESS_KEY }}" ]; then
+        if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ] || [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
           echo "AWS credentials are not set"
           exit 1
         else
@@ -32,8 +32,8 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2 
 
     - name: Terraform Init
