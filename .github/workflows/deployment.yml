@@ -1,0 +1,36 @@
+name: Deploy Application to AWS Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - assignment10
+    paths:
+      - 'client/build/**'
+      - 'server/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp application-${{ github.sha }}.zip s3://your-s3-bucket-name
+
+      - name: Create Application Version
+        run: |
+          aws elasticbeanstalk create-application-version --application-name your-app-name --source-bundle S3Bucket="your-s3-bucket-name",S3Key="application-${{ github.sha }}.zip" --version-label ${{ github.run_number }} --description "Deployed via GitHub Actions"
+
+      - name: Deploy to Elastic Beanstalk
+        run: |
+          aws elasticbeanstalk update-environment --environment-name your-environment-name --version-label ${{ github.run_number }}
