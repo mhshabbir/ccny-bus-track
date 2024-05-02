@@ -1,36 +1,56 @@
-name: Deploy Application to AWS Elastic Beanstalk
+name: Deploy Application
 
 on:
   push:
-    branches:
+    branches: 
       - assignment10
-    paths:
-      - 'client/build/**'
-      - 'server/**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Application
+        run: npm run build 
+
+      - name: Archive Application
+        run: zip -r deployment-${{ github.run_id }}.zip ./dist  
+
+      - name: Upload ZIP to Artifact Storage
+        uses: actions/upload-artifact@v2
+        with:
+          name: application_artifact
+          path: deployment-${{ github.run_id }}.zip
+
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          aws-region: us-east-2  # Update to match your AWS region
 
-      - name: Upload to S3
-        run: |
-          aws s3 cp application-${{ github.sha }}.zip s3://your-s3-bucket-name
+      - name: Upload application to AWS S3
+        run: aws s3 cp deployment-${{ github.run_id }}.zip s3://your-bucket-name/deployment-${{ github.run_id }}.zip
 
-      - name: Create Application Version
+      - name: Create new application version in Elastic Beanstalk
         run: |
-          aws elasticbeanstalk create-application-version --application-name your-app-name --source-bundle S3Bucket="your-s3-bucket-name",S3Key="application-${{ github.sha }}.zip" --version-label ${{ github.run_number }} --description "Deployed via GitHub Actions"
+          aws elasticbeanstalk create-application-version \
+            --application-name bustrack \
+            --source-bundle S3Bucket="your-bucket-name",S3Key="deployment-${{ github.run_id }}.zip" \
+            --version-label "ver-${{ github.run_id }}" \
+            --description "Deployment from GitHub Actions"
 
-      - name: Deploy to Elastic Beanstalk
+      - name: Deploy application to Elastic Beanstalk
         run: |
-          aws elasticbeanstalk update-environment --environment-name your-environment-name --version-label ${{ github.run_number }}
+          aws elasticbeanstalk update-environment \
+            --environment-name bustrack-env \
+            --version-label "ver-${{ github.run_id }}"
