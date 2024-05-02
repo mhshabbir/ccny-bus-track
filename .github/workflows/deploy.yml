@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'client/**'
+      - 'server/**'
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          cd client && npm install
+          cd ../server && npm install
+
+      - name: Build application
+        run: |
+          cd client && npm run build
+
+      - name: Zip application files
+        run: |
+          cd ..
+          zip -r application-${{ github.sha }}.zip client/build server
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: application-${{ github.sha }}
+          path: application-${{ github.sha }}.zip
