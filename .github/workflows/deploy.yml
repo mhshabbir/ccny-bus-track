@@ -3,7 +3,7 @@
 name: Deploy Application
 
 on:
-  push:
+  workflow_run:
     workflows: [Playwritght Tests]
     types: [completed]
     branches: [assignment10]
