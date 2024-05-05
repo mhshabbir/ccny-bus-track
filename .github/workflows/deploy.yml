@@ -1,21 +1,24 @@
+# This workflow will deploy the application to the running environment after a successful merge to main
+
 name: Deploy Application
 
 on:
   push:
-    branches:
-      - assignment10
+    workflows: ['Terraform Deployment']
+    types: [completed]
+    branches: [assignment10]
 
 jobs:
-  deploy:
+  on-success:
     runs-on: ubuntu-latest
-
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} 
     steps:
     - uses: actions/checkout@v2
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '15'  
+        node-version: '20'  
 
     - name: Install Dependencies
       run: npm install
