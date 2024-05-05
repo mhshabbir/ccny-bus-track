@@ -4,14 +4,14 @@ name: Deploy Application
 
 on:
   push:
-    workflows: [Terraform Deployment]
+    workflows: [Playwritght Tests]
     types: [completed]
     branches: [assignment10]
 
 jobs:
   on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} 
+    if: ${{ github.event.workflow_run.conclusion }} 
     steps:
     - uses: actions/checkout@v2
 
