@@ -62,6 +62,6 @@ jobs:
         working-directory: ./terraform
         
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/assignment10'
         run: terraform apply -auto-approve tfplan
         working-directory: ./terraform
