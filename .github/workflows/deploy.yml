@@ -45,10 +45,8 @@ jobs:
     - name: Create Application Version
       run: |
         aws elasticbeanstalk create-application-version --application-name bustrack \
-        --version-label "ver-1.0" bustrack-${{ github.run_id }} \
-        --source-bundle S3Bucket="terraform-state-bustrack-quodfinis",S3Key="bustrack-${{ github.run_id }}.zip \
-        --description "Bustrack Application Version 1.0"
+        --version-label bustrack-${{ github.run_id }} --source-bundle S3Bucket="terraform-state-bustrack-quodfinis",S3Key="bustrack-${{ github.run_id }}.zip"
 
     - name: Update Elastic Beanstalk Environment
-      run: aws elasticbeanstalk update-environment --environment-name bustrack-env --version-label "ver-1.0" bustrack-${{ github.run_id }}
+      run: aws elasticbeanstalk update-environment --environment-name bustrack-env --version-label bustrack-${{ github.run_id }}
 
