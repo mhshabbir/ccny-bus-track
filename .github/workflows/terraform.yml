@@ -1,0 +1,83 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches: [ assignment10 ]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform.yml'
+  pull_request:
+    branches: [ assignment10 ]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform.yml'
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    name: Format and Validate Terraform Code
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        
+      - name: Terraform Format Check
+        run: terraform fmt -check
+        working-directory: ./terraform
+        
+      - name: Correct Formatting
+        if: failure()
+        run: |
+          terraform fmt
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Apply Terraform formatting changes"
+          git push
+        working-directory: ./terraform
+
+  deploy:
+    needs: format
+    runs-on: ubuntu-latest
+    name: Terraform Apply
+    environment: 
+      name: deployment
+      url: ${{ steps.deploy.outputs.deployment-url }}
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+      
+      - name: Check AWS Credentials
+        run: | 
+          if [ -z "${{ secrets.TERRAFORM_AWS_ACCESS_KEY_ID }}" ] || [ -z "${{ secrets.TERRAFORM_AWS_SECRET_ACCESS_KEY }}" ]; then
+            echo "AWS credentials are not set"
+            exit 1
+          else
+            echo "AWS credentials are set"
+          fi
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TERRAFORM_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2 
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform
+        
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./terraform
+        
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: ./terraform
+        
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/assignment10'
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./terraform
