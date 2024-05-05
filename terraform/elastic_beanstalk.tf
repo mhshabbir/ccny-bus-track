@@ -48,3 +48,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "3"
   }
 }
+
+output "eb_environment_name" {
+  value = aws_elastic_beanstalk_environment.env.name
+}
