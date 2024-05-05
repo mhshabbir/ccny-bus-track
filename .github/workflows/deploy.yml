@@ -4,7 +4,7 @@ name: Deploy Application
 
 on:
   push:
-    workflows: ['Terraform Deployment']
+    workflows: [Terraform Deployment]
     types: [completed]
     branches: [assignment10]
 
