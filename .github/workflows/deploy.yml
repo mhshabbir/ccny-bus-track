@@ -30,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: bustrack-deployment-package
-        path: bustrack-${{ github.run_id }}.zip
+        path: client/bustrack-${{ github.run_id }}.zip
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -40,7 +40,7 @@ jobs:
         aws-region: us-east-2  
 
     - name: Upload Application to S3
-      run: aws s3 cp bustrack-${{ github.run_id }}.zip s3://terraform-state-bustrack-quodfinis/bustrack-${{ github.run_id }}.zip
+      run: aws s3 cp client/bustrack-${{ github.run_id }}.zip s3://terraform-state-bustrack-quodfinis/bustrack-${{ github.run_id }}.zip
 
     - name: Create Application Version
       run: |
