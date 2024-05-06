@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: [test] # Triggered by the test workflow
     types: [completed] # The test workflow must complete
-    branches: [assignment10] # Only when main is updated
+    branches: [assignment10] # Only when assignment10 branch is updated
 
 jobs:
   on-success:
@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Specify the Node.js version you need
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
