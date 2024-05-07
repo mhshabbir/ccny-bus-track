@@ -1,12 +1,7 @@
+zip -r "ccnybustracker-${{ github.sha }}.zip" ./*
 
-cd dist
+aws s3 cp "ccnybustracker_deploy-${{ github.sha }}.zip" s3://terraform-state-ccnybustracker-mshabbir76
 
-zip -r ../ccnybustracker.zip .
+aws elasticbeanstalk create-application-version --application-name ccnybustracker --source-bundle S3Bucket="terraform-state-ccnybustracker-mshabbir76",S3Key="ccnybustracker-${{ github.sha }}.zip" --version-label "ver-$1" --description "file permissions" --region "us-east-1"
 
-echo "Deployment package created: ccnybustracker.zip"
-
-aws s3 cp "ccnybustracker.zip" s3://ccnybustacker
-
-aws elasticbeanstalk create-application-version --application-name ccnybustracker --source-bundle S3Bucket="ccnybustracker",S3Key="ccnybustracker_deploy-$1.zip" --version-label "ver-$1" --description "file permissions" --region "us-east-1"
-
-aws elasticbeanstalk update-environment --environment-name ccnybustracker-environment --version-label "ver-$1" --region "us-east-1"
+aws elasticbeanstalk update-environment --environment-name flaskbb-environment --version-label "ver-$1" --region "us-east-1"
