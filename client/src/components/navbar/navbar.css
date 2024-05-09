@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #7e57c6;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.navbar {
+  position: fixed; /* or absolute */
+  left: 0;
+  top: 0;
+  width: 100vw; /* Use viewport width */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.navbar img {
+  width: 75px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.logoutButton23 {
+  border: none;
+  background: none;
+  font-size: 20px;
+}
+
+.logoutButton23:hover{
+  text-decoration: underline;
+}
