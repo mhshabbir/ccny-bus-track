@@ -1,19 +1,41 @@
-import React from 'react'
-import './style.css'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import './navbar.css'
 
-const navbar = () => {
+const navbar = ({token, setToken}) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // console.log('token')
+    sessionStorage.removeItem('token');
+    setToken(false);
+    // console.log({token})
+    navigate('/login');
+  };
+
+
   return (
-    <div className='body'>
-      <ul className="nav-links">
-        <li><a href="Home.html">Home</a></li>
-        <li className="center"><a href="PublicSafety.html">Public Safety</a></li>
-        <li className="logo"><img src="ccnybuslogo.png" alt="CCNY Bus Logo" /></li> 
-        <li className="upward"><a href="MyQRCode.html">My QR Code</a></li>
-        <li className="forward"><a href="LoginSignup.html">Login/Signup</a></li>
-    </ul>
-    </div>
+    <nav className="navbar">
+      <Link to="/">Home</Link>
+      <Link to="/publicsafety">Public Safety</Link>
+      <Link to="/ccny">
+        <img src="https://www.ccny.cuny.edu/sites/default/files/styles/600px_wide/public/2023-06/ColinPowellSchool_CCNY_Economics%26Business_GuestFaculty_DemetriosPapacostasNoPhoto.png?itok=5r-pw_fF" alt="Street 125" />
+      </Link>
+      <Link to="/qrcode">My QR Code</Link>
+      {token ? (
+        <button className='logoutButton23' onClick={handleLogout}>
+          Logout
+        </button>
+      ) : (
+        <Link to="/login">
+        Login/Signup
+        </Link>
+      )}
+    </nav>
   )
 }
 
 export default navbar
+
+
 

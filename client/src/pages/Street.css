@@ -20,9 +20,8 @@
     align-items: center;
     background-color: #ffffff;
     border-radius: 10px;
+    margin-top: 120px;
   }
-
-  /* #e0dfdf */
 
   .input-container h2 {
     color: #000000;
@@ -36,6 +35,10 @@
   
   .button-container {
     margin-top: 60px;
+  }
+
+  .button-container image {
+    width: 100px;
   }
   
   .Street125Container {
@@ -91,8 +94,7 @@
     border-radius: 20px;
     cursor: pointer;
   }
-  
-  
+
   .button-container button {
     margin: 50px;
     padding: 20px 40px; 
@@ -104,6 +106,7 @@
     transition: background-color 0.3s;
     background-color: rgb(144, 144, 144);
   }
+
   
   
   .button-container button:hover {

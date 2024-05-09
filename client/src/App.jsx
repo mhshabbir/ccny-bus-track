@@ -8,9 +8,13 @@ import Street125 from './pages/Street125'
 import Street145 from './pages/Street145'
 import Login from './components/Login'
 import Navbar from './components/navbar/navbar'
+import QrCode from './pages/QrCode'
+import UserProfile from './pages/UserProfile'
+import PublicSafety from './pages/PublicSafety'
+
 
 const App = () => {
-  let navigate = useNavigate()
+  let Navigate = useNavigate()
   const [token, setToken] = useState(false)
 
   if(token){
@@ -22,25 +26,30 @@ const App = () => {
       let data = JSON.parse(sessionStorage.getItem('token'))
       setToken(data)
     }
-  }, [])
+  },[])
 
 
   return (
     <>
-      <Navbar />
+      <Navbar token={token} setToken={setToken}/>
       <Routes>
-        <Route path='/login' element={<Login setToken={setToken}/>}/>
-        {token?<Route path='/' element={<LoginPage setToken={setToken}/>}/> : <Route path='/' element={<Login setToken={setToken}/>}/> }
+        <Route path='/' element={<HomePage token={token} />}/>
         <Route path='/login' element={<Login setToken={setToken}/>}/>
         <Route path='/signup' element={<RegisterPage/>} />
-        {token?<Route path='/home' element={<HomePage />}/>:""}
-        {token?<Route path='/CCNY' element={<Ccny/>}/>:""}
-        {token?<Route path='/Street125' element={<Street125/>}/>:""}
-        {token?<Route path='/Street145' element={<Street145/>}/>:""}
+        <Route path='/qrcode' element={<QrCode token={token}/>} />
+        <Route path='/home' element={<HomePage token={token} />}/>
+        <Route path='/ccny' element={<Ccny token={token} />}/>
+        <Route path='/Street125' element={<Street125 token={token} />}/>
+        <Route path='/Street145' element={<Street145 token={token} />}/>
+        <Route path='/publicsafety' element={<PublicSafety token={token} />}/>
       </Routes>
     </>
   )
 }
 
 export default App
+
+
+
+
 
