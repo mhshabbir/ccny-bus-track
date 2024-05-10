@@ -33,11 +33,11 @@ async function simulate() {
                 const wait125 = wait[1];
                 const wait145 = wait[2];  
                 await updateTime('1', waitCCNY, wait145, wait125);
+                await delay(4000);
             };
         };
-
-        await delay(5000);
     };
 };
 
+simulate();
 module.exports = { simulate };

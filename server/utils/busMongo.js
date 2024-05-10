@@ -32,7 +32,7 @@ function mongoDBRequest(action, filter, update) {
     return fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            // console.log(`${action} Response:`, data);
+            console.log(`${action} Response:`, data);
             return data;
         })
         .catch(error => {

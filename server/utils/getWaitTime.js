@@ -19,6 +19,7 @@ function closestIndex(route, coord) {
 }
 
 function getWaitTime(bus) {
+    console.log(bus);
     currentCoord = [bus.location.lat, bus.location.lng]
     nextStop = bus.stop.next
     previousStop = bus.stop.prev
