@@ -24,8 +24,6 @@ async function simulate() {
 
             const result = await readBusData('1');  
             const bus = result.document;
-            const lat = bus.location.lat;
-            const lng = bus.location.lng;
 
             const wait = getWaitTime(bus);
             const waitCCNY = wait[0]; 
