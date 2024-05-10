@@ -7,19 +7,21 @@ mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
 const MapComponent = () => {
     const mapContainerRef = useRef(null);
     const mapRef = useRef(null);
-    const [busLocation, setBusLocation] = useState([0, 0]);  // Default coordinates
+    const [busLocation, setBusLocation] = useState([-73.960478, 40.812534]);  // Default coordinates to NYC
 
     // Function to fetch bus data
-    const fetchBusData = async () => {
-        try {
-            const result = await readBusData('1');
-            if (result && result.document && result.document.location) {
-                setBusLocation([result.document.location.lng, result.document.location.lat]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:5000/api/busData');
+            const data = await response.json();
+            if (data && data.location) {
+                setBusLocation([data.location.lng, data.location.lat]);
             }
-        } catch (error) {
-            console.error('Failed to fetch bus data:', error);
-        }
-    };
+        };
+    
+        const interval = setInterval(fetchData, 3000); // Fetch data every 3 seconds
+        return () => clearInterval(interval);
+    }, []);
 
     // Initialize map
     useEffect(() => {
@@ -32,7 +34,7 @@ const MapComponent = () => {
             container: mapContainerRef.current,
             style: 'mapbox://styles/mapbox/streets-v11',
             bounds: bounds,
-            fitBoundsOptions: { padding: 20 }  // Adjust padding as needed
+            fitBoundsOptions: { padding: 20 }
         });
         mapRef.current = map;
 
@@ -52,7 +54,7 @@ const MapComponent = () => {
                 type: 'symbol',
                 source: 'gps',
                 layout: {
-                    'icon-image': 'rocket-15',  // Ensure you have this icon in your Mapbox style or use a valid icon
+                    'icon-image': 'rocket-15',  // Make sure this icon exists in your Mapbox account
                     'icon-size': 1.5
                 }
             });
@@ -61,18 +63,9 @@ const MapComponent = () => {
         return () => map.remove();
     }, []);
 
-    // Update bus location on map
-    useEffect(() => {
-        const interval = setInterval(() => {
-            fetchBusData();
-        }, 2000);
-
-        return () => clearInterval(interval);
-    }, []);
-
     // Update the map source when busLocation changes
     useEffect(() => {
-        if (mapRef.current) {
+        if (mapRef.current && mapRef.current.getSource('gps')) {
             mapRef.current.getSource('gps').setData({
                 type: 'Feature',
                 geometry: {
