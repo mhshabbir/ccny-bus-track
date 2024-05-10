@@ -1,5 +1,5 @@
-const busRoutes = require('./busRoutes.js');
-const generateRoute = require('./generateRoute.js');
+const busRoutes = require('../busRoutes.js');
+const generateRoute = require('../generateRoute.js');
 
 // Test function
 function testGenerateRoute(route, numPoints) {

@@ -1,6 +1,6 @@
 // test_updateMongo.js
 
-const { updateLocation, updateNextStop, updatePrevStop, readBusData } = require('./busMongo.js');
+const { updateLocation, updateNextStop, updatePrevStop, readBusData } = require('../busMongo.js');
 
 async function testUpdateLocation() {
     const busId = "1";

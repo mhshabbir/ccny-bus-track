@@ -1,5 +1,5 @@
-const busRoutes = require('./busRoutes.js');
-const atStop = require('./atStop.js');
+const busRoutes = require('../busRoutes.js');
+const atStop = require('../atStop.js');
 
 // Test function
 function testAtStop(route) {

@@ -1,5 +1,5 @@
-const busRoutes = require('./busRoutes.js');
-const getWaitTime = require('./getWaitTime.js');
+const busRoutes = require('../busRoutes.js');
+const getWaitTime = require('../getWaitTime.js');
 
 
 // test bus
