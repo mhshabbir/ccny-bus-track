@@ -19,9 +19,9 @@ function closestIndex(route, coord) {
 }
 
 function getWaitTime(bus) {
-    currentCoord = bus.currentCoord
-    nextStop = bus.nextStop
-    previousStop = bus.previousStop
+    currentCoord = [bus.location.lat, bus.location.lng]
+    nextStop = bus.stop.next
+    previousStop = bus.stop.prev
 
     const stop = atStop.atStop(currentCoord);
     let waitTimes = [0, 0, 0]; // Initialize wait times for [CCNY, 125th Station, 145th Station]
