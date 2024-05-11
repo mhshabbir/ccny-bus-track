@@ -11,7 +11,7 @@ import Navbar from './components/navbar/navbar'
 import QrCode from './pages/QrCode'
 import UserProfile from './pages/UserProfile'
 import PublicSafety from './pages/PublicSafety'
-
+import MapPage from './pages/MapPage'
 
 const App = () => {
   let Navigate = useNavigate()
@@ -42,6 +42,7 @@ const App = () => {
         <Route path='/Street125' element={<Street125 token={token} />}/>
         <Route path='/Street145' element={<Street145 token={token} />}/>
         <Route path='/publicsafety' element={<PublicSafety token={token} />}/>
+        <Route path="/map" element={<MapPage />} />
       </Routes>
     </>
   )
