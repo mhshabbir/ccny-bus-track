@@ -1,0 +1,35 @@
+.container{
+    width: 90%; 
+    height: auto;
+    min-height: 50vh; 
+    margin: 5vh auto;
+    padding: 40px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-top: 0px;
+
+  }
+
+  .headers {
+    display: block;
+    font-size: 1.17em;
+    color: black;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+  }
+
+  .title{
+    color: #7e57c6;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
