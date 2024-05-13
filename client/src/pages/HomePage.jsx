@@ -18,7 +18,7 @@ function HomePage({token}) {
                 <button onClick={() => navigate('/Street125')}>125 Street</button>
                 <button onClick={() => navigate('/CCNY')}>CCNY</button>
                 <button onClick={() => navigate('/Street145')}>145 Street</button>
-                <button onClick={() => navigate('/map')}>MAP</button>
+                {/* <button onClick={() => navigate('/map')}>MAP</button> */}
               </div>
           </div>
       </div>

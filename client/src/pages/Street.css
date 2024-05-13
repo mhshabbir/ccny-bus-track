@@ -17,7 +17,7 @@
     padding: 40px; 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     background-color: #ffffff;
     border-radius: 10px;
     margin-top: 120px;
@@ -44,7 +44,7 @@
   .Street125Container {
     display: flex;
     flex-direction: row; /* Aligns children horizontally */
-    align-items: center; /* Centers children vertically */
+    align-items: right; /* Centers children vertically */
     gap: 20px; /* Adds some space between the image and the h3 tag */
   }
   
@@ -55,12 +55,12 @@
   }
   
   .Street125Container img {
-    width: 230px;
+    width: 200px;
     height: auto;
-    /* You can also use 'max-width' instead of 'width' if you want the image to be responsive */
   }
   
   .Street125Container h3 {
+    margin-left: 10px;
     color: #000000;
     font-style: italic;
   }
@@ -74,12 +74,14 @@
   
   
   .streetInfo h2{
-    /* padding-top: 10px; */
     text-align: center; /* Centers the text within each streetInfo block */
-    font-size: 75px;
+    font-size: 50px;
     padding-left: 30px;
     padding-right: 30px;
     align-items: center;
+    margin-top: 0px;
+    font-style: normal;
+    font-family: serif;
   }
   
   .streetInfo p {
@@ -93,6 +95,9 @@
     background-color: #900c8e;
     border-radius: 20px;
     cursor: pointer;
+    /* width: 200px; */
+    /* margin-left: 45%;
+    margin-right: 45%; */
   }
 
   .button-container button {

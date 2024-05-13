@@ -9,12 +9,13 @@ const { readBusData } = require('./utils/busMongo.js');
 
 const app = express();
 app.use(cors({
-    origin: 'https://super-duper-waffle-4q95j7grwwjfjx7r-5173.app.github.dev', // frontend URL
+    // origin: 'https://super-duper-waffle-4q95j7grwwjfjx7r-5173.app.github.dev', // frontend URL
+    origin: 'http://localhost:5173/',
     methods: ['GET', 'POST', 'OPTIONS'],  
     allowedHeaders: ['Content-Type', 'Authorization'],  
 }));
 app.options('*', cors()); // include before other routes
-const port = 5000;
+const port = 5174;
 
 
 app.get('/api/busData', async (req, res) => {
