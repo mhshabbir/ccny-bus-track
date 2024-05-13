@@ -1,0 +1,22 @@
+{
+    "name": "navbarreact",
+    "version": "1.0.0",
+    "scripts": {
+        "test": "jest",
+        "test:e2e": "playwright test",
+        "test:e2e:local": "playwright test e2e/navbar.test.js"
+      },
+    "jest": {
+        "testEnvironment": "jsdom",
+        "testMatch": [
+            "**/__tests__/**/*.[jt]s?(x)",
+            "**/?(*.)+(spec|test).[tj]s?(x)"
+        ]
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^5.14.1",
+        "@testing-library/react": "^12.1.2",
+        "jest": "^27.5.1",
+        "playwright": "^1.42.1"
+    }
+}
