@@ -4,18 +4,20 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
-const MapComponent = () => {
+const MapComponent = ({width}) => {
     const mapContainerRef = useRef(null); // This ref attaches to the map container div
     const mapRef = useRef(null); // Ref to hold the Mapbox map instance
     const [busLocation, setBusLocation] = useState([-73.960478, 40.812534]); // Default coordinates to NYC
     const [waitTimes, setWaitTimes] = useState({ ccny: 0, uptown: 0, downtown: 0 }); // Store wait times
+    // const style = { width: `${width}px` };
 
     // Function to fetch bus data and wait times
     useEffect(() => {
-        const apiUrl = "https://super-duper-waffle-4q95j7grwwjfjx7r-5000.app.github.dev" // UPDATE THIS WITH ACTUAL ADDRERSS
+        // const apiUrl = "https://super-duper-waffle-4q95j7grwwjfjx7r-5000.app.github.dev" // UPDATE THIS WITH ACTUAL ADDRERSS
+        const apiUrl = "http://localhost:5174/api/busData"
         const fetchData = async () => {
             try {
-                const response = await fetch(`${apiUrl}/api/busData`, {
+                const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -93,13 +95,13 @@ const MapComponent = () => {
 
     return (
         <div className="map-container">
-            <h1>Real-Time Bus Tracker</h1>
-            <div className="wait-times">
+            {/* <h1>Real-Time Bus Tracker</h1> */}
+            {/* <div className="wait-times">
                 <p>CCNY Campus Station: {waitTimes.ccny} minutes away</p>
                 <p>125 Street Station: {waitTimes.uptown} minutes away</p>
                 <p>145 Street Station: {waitTimes.downtown} minutes away</p>
-            </div>
-            <div ref={mapContainerRef} style={{ width: '100%', height: '400px' }}></div>
+            </div> */}
+            <div ref={mapContainerRef} style={{ width: width, height: '300px' }}></div>
         </div>
     );
 };
