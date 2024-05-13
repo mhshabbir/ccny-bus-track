@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Real-time Location Tracking</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = process.env.MAPBOXURI;
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [-73.949775, 40.820287], // Center the map around the general area of ccny
+            zoom: 14 
+        });
+
+        map.on('load', () => {
+            // Initialize the GPS point on the map without setting its coordinates yet
+            map.addSource('gps', { type: 'geojson', data: { type: 'Point', coordinates: [-73.949775, 40.820287] } });
+            map.addLayer({
+                'id': 'gps',
+                'type': 'symbol',
+                'source': 'gps',
+                'layout': { 
+			        'icon-image': 'bus-15',
+			        'icon-size' : 1.5 
+			    }
+            });
+
+            // Function to update map centering around bus location
+            function updateBusLocation() {
+                fetch('/api/bus-info') // Adjust to actual API endpoint
+                    .then(response => response.json())
+                    .then(data => {
+                        const coordinates = [data.nextStopCoords[0], data.nextStopCoords[1]];
+                        // Update the map with the new location
+                        map.getSource('gps').setData({
+                            type: 'Point',
+                            coordinates: coordinates
+                        });
+                        map.flyTo({ center: coordinates, speed: 0.5 });
+
+                        // Update the document title with the direction
+                        document.title = `Bus Direction: ${data.direction}`;
+                    })
+                    .catch(error => console.error('Error fetching bus location:', error));
+            }
+
+            // Update bus location every 2 seconds
+            setInterval(updateBusLocation, 2000);
+        });
+    </script>
+</body>
+</html>

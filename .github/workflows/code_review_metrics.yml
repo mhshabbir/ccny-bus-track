@@ -1,0 +1,44 @@
+name: Capture Metrics
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight
+  workflow_dispatch: # Allows manual triggering
+  pull_request:
+    types: [closed]
+    branches: [ main, master ] # Run on closing PRs against main or master
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub matplotlib numpy pandas
+      
+      # Generate and visualize metrics
+      - name: Generate Metrics Report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate_metrics_report.py
+      
+      # Upload the generated metrics report images
+      - uses: actions/upload-artifact@v4
+        with:
+          name: metrics-report-images
+          path: |
+            commits_per_branch.png
+            pr_review_time_trend.png
+            pr_duration_by_author.png
+            pr_comments_by_author.png
+            comments_by_contributor.png
+            cr_metrics.png
+          retention-days: 30
